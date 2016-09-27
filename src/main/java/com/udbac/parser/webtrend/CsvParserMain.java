@@ -1,8 +1,8 @@
 package com.udbac.parser.webtrend;
 
-import java.sql.SQLException;
-
 import com.udbac.parser.database.InsertIntoDababase;
+
+import java.sql.SQLException;
 
 public class CsvParserMain {
 	
