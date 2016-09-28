@@ -178,8 +178,7 @@ public class BaseTableReader {
      * @param dir
      * @return
      */
-    
-    //乱码乱码会导致空指针
+	
     public static List<TbAmpFlowNatureDaily> getTbAmpFlowNatureDaily(String dir){
     	
     	File mcidPortalFile = new File(dir + "\\访前网站_入站页(排除mcid)门户pc.csv");

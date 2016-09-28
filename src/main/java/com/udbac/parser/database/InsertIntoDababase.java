@@ -1,20 +1,14 @@
 package com.udbac.parser.database;
 
+import com.udbac.parser.entity.*;
+import com.udbac.parser.readcsv.BaseTableReader;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import com.udbac.parser.database.BeyondbConnection;
-import com.udbac.parser.entity.BaseTable;
-import com.udbac.parser.entity.TbAmpBackendTransDaily;
-import com.udbac.parser.entity.TbAmpFlowMarketingDaily;
-import com.udbac.parser.entity.TbAmpFlowNatureDaily;
-import com.udbac.parser.entity.TbAmpFlowTotalDaily;
-import com.udbac.parser.readcsv.BaseTableReader;
 
 public class InsertIntoDababase {
 	private Logger logger = Logger.getLogger(InsertIntoDababase.class);
@@ -24,6 +18,7 @@ public class InsertIntoDababase {
 	 * 输入后端监测日数据到tb_amp_backend_base _daily表中
 	 */	 
 	public void insertIntoTbAmpBackendBaseDaily() throws SQLException{
+		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "csvtest";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -37,10 +32,12 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				System.out.println(sql);
+				logger.error(sql);
+//				System.out.println(sql);
 			}
 			}
 		con.close();
+		logger.info("插入数据到tb_amp_backend_base _daily完成");
 		System.out.println("插入数据到tb_amp_backend_base _daily完成");
 
 //		String sql = "insert into csvtest values(null,?,?,?,?,?,?)";
@@ -63,6 +60,7 @@ public class InsertIntoDababase {
 	 * 输入活动网站监测业务转换数据到tb_amp_backend_trans_daily表中
 	 */
 	public  void insertIntoTbAmpBackendTransDaily() throws SQLException{
+		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_backend_trans_daily";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -76,7 +74,8 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				System.out.println(sql);
+				logger.error(sql);
+//				System.out.println(sql);
 			}
 			}
 		/**
@@ -89,6 +88,7 @@ public class InsertIntoDababase {
 	 * 输入数据到tb_amp_flow_marketing_daily表中
 	 */
 	public  void insertIntoTbAmpFlowMarketingDaily() throws SQLException{
+		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_marketing_daily";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -102,7 +102,8 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				System.out.println(sql);
+				logger.error(sql);
+//				System.out.println(sql);
 			}
 			}
 		/**
@@ -141,6 +142,7 @@ public class InsertIntoDababase {
 		 * 关闭相关对象
 		 */
 			con.close();
+		logger.info("数据插入表tb_amp_flow_nature_daily完成！");
 		 	
 	}
 	
@@ -148,6 +150,7 @@ public class InsertIntoDababase {
 	 * 输入数据到tb_amp_flow_total_daily表中
 	 */
 	public  void insertIntoTbAmpFlowTotalDaily() throws SQLException{
+		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_total_daily";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -161,7 +164,8 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				System.out.println(sql);
+				logger.error(sql);
+//				System.out.println(sql);
 			}
 			}
 		/**
