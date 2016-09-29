@@ -114,7 +114,6 @@ public class InsertIntoDababase {
 	
 	/**
 	 * 输入数据到tb_amp_flow_nature_daily表中
-	 * @throws SQLException 
 	 */
 	public  void insertIntoTbAmpFlowNatureDaily() throws SQLException {
 		
@@ -172,6 +171,31 @@ public class InsertIntoDababase {
 		 * 关闭相关对象
 		 */
 		con.close();	
+	}
+
+	public  void insertIntoTbAmpWebDaily() throws SQLException{
+		PropertyConfigurator.configure("log4j.properties");
+		String tableName = "test";
+//		BaseTableReader bt= new BaseTableReader();
+		if(con ==null){
+			con = BeyondbConnection.getConnection();
+		}
+		List<TbAmpWEbDaily> list = BaseTableReader.getTbAmpWEbDaily("d:\\csvs");
+		PreparedStatement pstmt;
+		for (TbAmpWEbDaily natureTable : list) {
+			String sql = "INSERT INTO " + tableName + " VALUES(" + natureTable.toString() + ")";
+			try{
+				pstmt = con.prepareStatement(sql);
+				pstmt.executeUpdate();
+			}catch(Exception e){
+				logger.error(sql);
+//				System.out.println(sql);
+			}
+		}
+		/**
+		 * 关闭相关对象
+		 */
+		con.close();
 	}
 
 }

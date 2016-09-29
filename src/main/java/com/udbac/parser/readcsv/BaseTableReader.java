@@ -1,10 +1,6 @@
 package com.udbac.parser.readcsv;
 
-import com.udbac.parser.entity.BaseTable;
-import com.udbac.parser.entity.TbAmpBackendTransDaily;
-import com.udbac.parser.entity.TbAmpFlowMarketingDaily;
-import com.udbac.parser.entity.TbAmpFlowNatureDaily;
-import com.udbac.parser.entity.TbAmpFlowTotalDaily;
+import com.udbac.parser.entity.*;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
@@ -66,7 +62,7 @@ public class BaseTableReader {
         }
         return baseTableList;
     }
-    
+
     /**
      * 获取后端监测日转化数据表数据
      * @param dir
@@ -278,7 +274,6 @@ public class BaseTableReader {
     	TbAmpFlowTotalDaily tbAmpFlowTotalDaily = null;
     	
     	for(String[] row1: portalRows){
-    		
     		tbAmpFlowTotalDaily = new TbAmpFlowTotalDaily();
     		if(row1.length != 8 || null == row1[0]){
 				continue;
@@ -325,6 +320,31 @@ public class BaseTableReader {
     	
     }
 
+
+	public static List<TbAmpWEbDaily> getTbAmpWEbDaily(String dir){
+
+		File ampWebFile = new File(dir + "\\校园营销-物联网落地页元素点击0806-0828.csv");
+		List<String[]> ampWebRows = parseCSV2Rows(ampWebFile);
+
+		List<TbAmpWEbDaily> tbAmpWebDailyList = new ArrayList<TbAmpWEbDaily>();
+		TbAmpWEbDaily tbAmpWebDaily = null;
+		for(String[] row1:ampWebRows) {
+			tbAmpWebDaily = new TbAmpWEbDaily();
+			if(row1.length != 7 || null == row1[0]){
+//				System.out.println(row1.length);
+				continue;
+			}
+			tbAmpWebDaily.setMcid(row1[1]);
+			tbAmpWebDaily.setEvent(row1[2]);
+			tbAmpWebDaily.setVisits(row1[3]);
+			tbAmpWebDaily.setVisitRate(row1[4]);
+			tbAmpWebDaily.setClick(row1[5]);
+			tbAmpWebDaily.setPageview(row1[6]);
+			tbAmpWebDailyList.add(tbAmpWebDaily);
+		}
+		return tbAmpWebDailyList;
+	}
+
     public static List<String[]> parseCSV2Rows(File filename) {
         CsvParserSettings visitsSetting = new CsvParserSettings();
         visitsSetting.getFormat().setLineSeparator("\n");
@@ -356,6 +376,7 @@ public class BaseTableReader {
           System.out.println(baseTable.toString());
       }
       System.out.println(list.size());
+
   }
 
 //  List<TbAmpFlowTotalDaily> list = getTbAmpFlowTotalDaily("d:\\csvs");

@@ -23,10 +23,12 @@ public class CsvParserMain {
 		/**
 		 * 数据写入tb_amp_flow_nature_daily表
 		 */
-		in.insertIntoTbAmpFlowNatureDaily();
+//		in.insertIntoTbAmpFlowNatureDaily();
 		/**
 		 * 数据写入tb_amp_flow_total_daily表
 		 */
 //		in.insertIntoTbAmpFlowTotalDaily();
+
+        in.insertIntoTbAmpWebDaily();
 	}
 }
