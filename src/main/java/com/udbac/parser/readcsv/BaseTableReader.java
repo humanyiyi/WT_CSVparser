@@ -145,7 +145,7 @@ public class BaseTableReader {
     	
     	File ampFlowMarketFile = new File(dir + "\\营销流量allhits_WT.es-new.csv");
     	List<String[]> ampFlowMarketRows = parseCSV2Rows(ampFlowMarketFile);
-    	
+
     	List<TbAmpFlowMarketingDaily> tbAmpFlowMarketingDailyList = new ArrayList<TbAmpFlowMarketingDaily>();
     	TbAmpFlowMarketingDaily tbAmpFlowMarketingDaily = null;
 		for(String[] row1:ampFlowMarketRows){
@@ -175,20 +175,23 @@ public class BaseTableReader {
      * @return
      */
 	
-    public static List<TbAmpFlowNatureDaily> getTbAmpFlowNatureDaily(String dir){
+    public static List<TbAmpFlowNatureDaily> getTbAmpFlowNatureDaily(String dir) {
     	
     	File mcidPortalFile = new File(dir + "\\访前网站_入站页(排除mcid)门户pc.csv");
     	List<String[]> mcidPortalRows = parseCSV2Rows(mcidPortalFile);
+
+//		File mcidPortalTouchFile = new File(dir + "\\访前网站_入站页(排除mcid)门户pc.csv");
+//		List<String[]> mcidPortalTouchRows = parseCSV2Rows(mcidPortalTouchFile);
     	
     	File mcidShopFile = new File(dir + "\\访前网站_入站页(排除mcid)shop.csv");
     	List<String[]> mcidShopRows = parseCSV2Rows(mcidShopFile);
     	
     	File mcidTouchFile = new File(dir + "\\访前网站_入站页(排除mcid)touch.csv");
     	List<String[]> mcidTouchRows = parseCSV2Rows(mcidTouchFile);
-    	
+
     	List<TbAmpFlowNatureDaily> tbAmpFlowNatureDailyList = new ArrayList<TbAmpFlowNatureDaily>();
     	TbAmpFlowNatureDaily tbAmpFlowNatureDaily = null;
-    	
+
     	for(String[] row1: mcidPortalRows){
     		
     		tbAmpFlowNatureDaily = new TbAmpFlowNatureDaily();
@@ -196,9 +199,10 @@ public class BaseTableReader {
 				continue;
 			}
     		
-    		if(row1[4] != null && row1[4].equals("合计")){
+    		if(row1[4] != null && row1[4].equals("合计")) {
 				continue;
 			}
+			tbAmpFlowNatureDaily.setClassfy("增加端口维度");
     		tbAmpFlowNatureDaily.setUrl(row1[2]);
     		tbAmpFlowNatureDaily.setEntryPage(row1[4]);
     		tbAmpFlowNatureDaily.setVisits(row1[7]);
@@ -218,7 +222,7 @@ public class BaseTableReader {
     		if(row2[4] != null && row2[4].equals("合计") ){
 				continue;
 			}
-    		
+    		tbAmpFlowNatureDaily.setClassfy("PC端");
     		tbAmpFlowNatureDaily.setUrl(row2[2]);
     		tbAmpFlowNatureDaily.setEntryPage(row2[4]);
     		tbAmpFlowNatureDaily.setVisits(row2[7]);
@@ -238,7 +242,7 @@ public class BaseTableReader {
     		if(row3[4] != null && row3[4].equals("合计")  ){
 				continue;
 			}
-    		
+    		tbAmpFlowNatureDaily.setClassfy("移动端");
     		tbAmpFlowNatureDaily.setUrl(row3[2]);
     		tbAmpFlowNatureDaily.setEntryPage(row3[4]);
     		tbAmpFlowNatureDaily.setVisits(row3[7]);
@@ -275,14 +279,15 @@ public class BaseTableReader {
     	
     	for(String[] row1: portalRows){
     		tbAmpFlowTotalDaily = new TbAmpFlowTotalDaily();
-    		if(row1.length != 8 || null == row1[0]){
+    		if(row1.length != 8 || null == row1[0]) {
 				continue;
 			}
+			tbAmpFlowTotalDaily.setClassfy("");
     		tbAmpFlowTotalDaily.setUrl(row1[2]);
     		tbAmpFlowTotalDaily.setVisits(row1[5]);
     		tbAmpFlowTotalDaily.setPv(row1[6]);
     		tbAmpFlowTotalDaily.setViewTime(row1[7]);
-    		
+
     		tbAmpFlowTotalDailyList.add(tbAmpFlowTotalDaily);
     	}
     	
@@ -292,6 +297,7 @@ public class BaseTableReader {
     		if(row2.length != 8 || null == row2[0]){
 				continue;
 			}
+			tbAmpFlowTotalDaily.setClassfy("PC端");
     		tbAmpFlowTotalDaily.setUrl(row2[2]);
     		tbAmpFlowTotalDaily.setVisits(row2[5]);
     		tbAmpFlowTotalDaily.setPv(row2[6]);
@@ -306,6 +312,7 @@ public class BaseTableReader {
     		if(row3.length != 8 || null == row3[0]){
 				continue;
 			}
+			tbAmpFlowTotalDaily.setClassfy("移动端");
     		tbAmpFlowTotalDaily.setUrl(row3[2]);
     		tbAmpFlowTotalDaily.setVisits(row3[5]);
     		tbAmpFlowTotalDaily.setPv(row3[6]);

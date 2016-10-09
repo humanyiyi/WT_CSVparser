@@ -13,6 +13,7 @@ public static Connection getConnection() {
 
 	Connection con = null;
 	/**
+	 * url解析
 	 * localhost指本机，也可以用本地ip地址代替，可以修改为指定的ip，
 	 * 5432为postgresql数据库的默认端口号
 	 * postgre为数据库名

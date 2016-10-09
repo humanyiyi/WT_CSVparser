@@ -1,15 +1,15 @@
 package com.udbac.parser.readcsv;
 
-import java.io.File;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Connection;
 import com.udbac.parser.database.BeyondbConnection;
 import com.udbac.parser.entity.TbAmpFlowNatureDaily;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Test {
@@ -79,7 +79,7 @@ public class Test {
 //}
 
     
-    public static  void insertIntoTbAmpFlowNatureDaily() throws SQLException{
+    public static  void insertIntoTbAmpFlowNatureDaily() throws Exception {
 		String tableName = "tb_amp_flow_nature_daily";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -104,7 +104,7 @@ public class Test {
 	}
 	
     
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception {
 //        List<TbAmpFlowNatureDaily> list = getTbAmpFlowNatureDaily("d:\\csvs");
 //        for (TbAmpFlowNatureDaily baseTable : list) {
 //            System.out.println(baseTable.toString());

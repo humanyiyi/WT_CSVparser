@@ -13,7 +13,7 @@ import java.util.List;
 public class InsertIntoDababase {
 	private Logger logger = Logger.getLogger(InsertIntoDababase.class);
 	 private  Connection con = null;
-	 
+
 	 /**
 	 * 输入后端监测日数据到tb_amp_backend_base _daily表中
 	 */	 
@@ -36,9 +36,9 @@ public class InsertIntoDababase {
 //				System.out.println(sql);
 			}
 			}
-		con.close();
+//		con.close();
 		logger.info("插入数据到tb_amp_backend_base _daily完成");
-		System.out.println("插入数据到tb_amp_backend_base _daily完成");
+//		System.out.println("插入数据到tb_amp_backend_base _daily完成");
 
 //		String sql = "insert into csvtest values(null,?,?,?,?,?,?)";
 //		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -81,7 +81,8 @@ public class InsertIntoDababase {
 		/**
 		 * 关闭相关对象
 		 */
-		con.close();  	
+//		con.close();
+		logger.info("插入数据到tb_amp_backend_trans_daily完成");
 	}
 	
 	/**
@@ -109,13 +110,14 @@ public class InsertIntoDababase {
 		/**
 		 * 关闭相关对象
 		 */
-		con.close();  	
+//		con.close();
+		logger.info("插入数据到tb_amp_flow_marketing_daily完成");
 	}
 	
 	/**
 	 * 输入数据到tb_amp_flow_nature_daily表中
 	 */
-	public  void insertIntoTbAmpFlowNatureDaily() throws SQLException {
+	public  void insertIntoTbAmpFlowNatureDaily() throws  SQLException {
 		
 		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_nature_daily";
@@ -140,9 +142,9 @@ public class InsertIntoDababase {
 		/**
 		 * 关闭相关对象
 		 */
-			con.close();
+//			con.close();
 		logger.info("数据插入表tb_amp_flow_nature_daily完成！");
-		 	
+//		System.out.println("插入数据到tb_amp_flow_nature_daily完成");
 	}
 	
 	/**
@@ -170,7 +172,8 @@ public class InsertIntoDababase {
 		/**
 		 * 关闭相关对象
 		 */
-		con.close();	
+		con.close();
+		logger.info("插入数据到tb_amp_flow_total_daily完成");
 	}
 
 	public  void insertIntoTbAmpWebDaily() throws SQLException{

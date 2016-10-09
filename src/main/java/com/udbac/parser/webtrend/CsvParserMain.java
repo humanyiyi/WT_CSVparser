@@ -11,24 +11,24 @@ public class CsvParserMain {
 		/**
 		 * 数据写入tb_amp_backend_base_daily表
 		 */
-//		in.insertIntoTbAmpBackendBaseDaily();
+		in.insertIntoTbAmpBackendBaseDaily();
 		/**
 		 * 数据写入tb_amp_backend_trans_daily表
 		 */
-//		in.insertIntoTbAmpBackendTransDaily();
+		in.insertIntoTbAmpBackendTransDaily();
 		/**
 		 * 数据写入tb_amp_flow_marketing_daily表
 		 */
-//		in.insertIntoTbAmpFlowMarketingDaily();
+		in.insertIntoTbAmpFlowMarketingDaily();
 		/**
 		 * 数据写入tb_amp_flow_nature_daily表
 		 */
-//		in.insertIntoTbAmpFlowNatureDaily();
+		in.insertIntoTbAmpFlowNatureDaily();
 		/**
 		 * 数据写入tb_amp_flow_total_daily表
 		 */
-//		in.insertIntoTbAmpFlowTotalDaily();
+		in.insertIntoTbAmpFlowTotalDaily();
 
-        in.insertIntoTbAmpWebDaily();
+//        in.insertIntoTbAmpWebDaily();
 	}
 }
