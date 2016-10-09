@@ -24,9 +24,9 @@ public class InsertIntoDababase {
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
 	   }
-		List<BaseTable> list = BaseTableReader.getBaseTable("d:\\csvs");
+		List<TbAmpBackendBaseDaily> list = BaseTableReader.getBaseTable("d:\\csvs");
 		PreparedStatement pstmt;
-		for (BaseTable baseTable : list) {
+		for (TbAmpBackendBaseDaily baseTable : list) {
 			String sql = "INSERT INTO " + tableName + " VALUES(" + baseTable.toString() + ")";
 			try{
 				pstmt = con.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class InsertIntoDababase {
 
 //		String sql = "insert into csvtest values(null,?,?,?,?,?,?)";
 //		PreparedStatement pstmt = con.prepareStatement(sql);
-//		for (BaseTable baseTable : list) {
+//		for (TbAmpBackendBaseDaily baseTable : list) {
 //		pstmt.setString(1, baseTable.getMic());
 //		pstmt.setString(2, baseTable.getVisits());
 //		pstmt.setString(3,baseTable.getVisitor());

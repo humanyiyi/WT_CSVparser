@@ -18,7 +18,7 @@ public class BaseTableReader {
 	 * @param dir
 	 * @return
 	 */
-    public static  List<BaseTable> getBaseTable(String dir) {
+    public static  List<TbAmpBackendBaseDaily> getBaseTable(String dir) {
         File visitsFile = new File(dir + "\\营销活动(访次).csv");
         List<String[]> visitRows = parseCSV2Rows(visitsFile);
 
@@ -31,11 +31,11 @@ public class BaseTableReader {
         File jump = new File(dir + "\\营销活动(跳出).csv");
         List<String[]> jumpRows = parseCSV2Rows(jump);
 
-        List<BaseTable> baseTableList = new ArrayList<BaseTable>();
-        BaseTable baseTable = null;
+        List<TbAmpBackendBaseDaily> baseTableList = new ArrayList<TbAmpBackendBaseDaily>();
+        TbAmpBackendBaseDaily baseTable = null;
 
         for (String[] row1 : visitRows) {
-            baseTable = new BaseTable();
+            baseTable = new TbAmpBackendBaseDaily();
             if (row1.length != 6 || null == row1[0]) {
                 continue;
             }
@@ -368,8 +368,8 @@ public class BaseTableReader {
     }
 
 //    public static void main(String[] args) {
-//        List<BaseTable> list = getBaseTable("d:\\csvs");
-//        for (BaseTable baseTable : list) {
+//        List<TbAmpBackendBaseDaily> list = getBaseTable("d:\\csvs");
+//        for (TbAmpBackendBaseDaily baseTable : list) {
 //            System.out.println(baseTable.toString1());
 //        }
 //        System.out.println(list.size());

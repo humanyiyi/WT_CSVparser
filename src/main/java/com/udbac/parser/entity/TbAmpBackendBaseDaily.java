@@ -3,7 +3,7 @@ package com.udbac.parser.entity;
 /**
  * Created by 43890 on 2016/9/19.
  */
-public class BaseTable {
+public class TbAmpBackendBaseDaily {
     private String createDate;
     private String mic;
     private String visits;
@@ -13,8 +13,8 @@ public class BaseTable {
     private String bounceVisit;
     private String viewTime;
 
-    public BaseTable(String createDate, String mic, String visits,
-                     String visitor, String pv, String click, String bounceVisit, String viewTime) {
+    public TbAmpBackendBaseDaily(String createDate, String mic, String visits,
+                                 String visitor, String pv, String click, String bounceVisit, String viewTime) {
         this.createDate = createDate;
         this.mic = mic;
         this.visits = visits;
@@ -25,7 +25,7 @@ public class BaseTable {
         this.viewTime = viewTime;
     }
 
-    public BaseTable() {
+    public TbAmpBackendBaseDaily() {
     }
 
     public String getCreateDate() {
@@ -94,7 +94,7 @@ public class BaseTable {
 
     @Override
 //    public String toString() {
-//        return "BaseTable{" +
+//        return "TbAmpBackendBaseDaily{" +
 //                "createDate='" + createDate + '\'' +
 //                ", mic='" + mic + '\'' +
 //                ", visits='" + visits + '\'' +
