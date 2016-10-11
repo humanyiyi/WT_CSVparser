@@ -19,12 +19,13 @@ public class InsertIntoDababase {
 	 */	 
 	public void insertIntoTbAmpBackendBaseDaily() throws SQLException{
 		PropertyConfigurator.configure("log4j.properties");
-		String tableName = "csvtest";
+//		String tableName = "csvtest";
+		String tableName = "TbAmpBackendBaseDailyTable";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
 	   }
-		List<TbAmpBackendBaseDaily> list = BaseTableReader.getBaseTable("d:\\csvs");
+		List<TbAmpBackendBaseDaily> list = BaseTableReader.getTbAmpBackendBaseDaily("d:\\csvs");
 		PreparedStatement pstmt;
 		for (TbAmpBackendBaseDaily baseTable : list) {
 			String sql = "INSERT INTO " + tableName + " VALUES(" + baseTable.toString() + ")";
@@ -32,7 +33,7 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				logger.error(sql);
+				logger.error(e);
 //				System.out.println(sql);
 			}
 			}
@@ -61,7 +62,7 @@ public class InsertIntoDababase {
 	 */
 	public  void insertIntoTbAmpBackendTransDaily() throws SQLException{
 		PropertyConfigurator.configure("log4j.properties");
-		String tableName = "tb_amp_backend_trans_daily";
+		String tableName = "tb_amp_backend_trans_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
@@ -74,7 +75,7 @@ public class InsertIntoDababase {
 				pstmt = con.prepareStatement(sql);
 				pstmt.executeUpdate();
 			}catch(Exception e){
-				logger.error(sql);
+				logger.error(e);
 //				System.out.println(sql);
 			}
 			}
@@ -88,9 +89,9 @@ public class InsertIntoDababase {
 	/**
 	 * 输入数据到tb_amp_flow_marketing_daily表中
 	 */
-	public  void insertIntoTbAmpFlowMarketingDaily() throws SQLException{
+	public  void insertIntoTbAmpFlowMarketingDaily() throws Exception {
 		PropertyConfigurator.configure("log4j.properties");
-		String tableName = "tb_amp_flow_marketing_daily";
+		String tableName = "tb_amp_flow_marketing_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
@@ -120,7 +121,7 @@ public class InsertIntoDababase {
 	public  void insertIntoTbAmpFlowNatureDaily() throws  SQLException {
 		
 		PropertyConfigurator.configure("log4j.properties");
-		String tableName = "tb_amp_flow_nature_daily";
+		String tableName = "tb_amp_flow_nature_daily_table";
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
 	   }
@@ -152,7 +153,7 @@ public class InsertIntoDababase {
 	 */
 	public  void insertIntoTbAmpFlowTotalDaily() throws SQLException{
 		PropertyConfigurator.configure("log4j.properties");
-		String tableName = "tb_amp_flow_total_daily";
+		String tableName = "tb_amp_flow_total_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();

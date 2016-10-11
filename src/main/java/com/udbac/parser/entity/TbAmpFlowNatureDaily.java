@@ -59,7 +59,7 @@ public class TbAmpFlowNatureDaily {
 //		.append(visits).append(',')
 //		.append(pv);
 //		return sb.toString();
-		return  createDate +
+		return  "'" + createDate + '\'' +
 				", '" + classfy + '\'' +
                 ", '" + url + '\'' +
                 ", '" + entryPage + '\'' +

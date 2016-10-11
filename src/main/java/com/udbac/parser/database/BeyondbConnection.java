@@ -19,14 +19,15 @@ public static Connection getConnection() {
 	 * postgre为数据库名
 	 */
 	String url ="jdbc:postgresql://localhost:5432/postgres";
-//	String url ="jdbc:postgresql://192.168.4.5:5432/mydb";
+//	String url ="jdbc:postgresql://192.168.4.2:5432/csv_test";
 	/**
 	 * user为数据库用户名
 	 * password为用户密码
 	 */
 	String user = "postgres";
 	String password = "postgres";
-	
+//	String user = "pguser";
+//	String password = "pguser";
 	try {
 		/**
 		 * 加载驱动程序，此处运行隐式注册驱动程序的方法

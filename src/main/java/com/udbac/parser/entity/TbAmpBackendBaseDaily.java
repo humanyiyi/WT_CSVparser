@@ -15,7 +15,7 @@ public class TbAmpBackendBaseDaily {
 
     public TbAmpBackendBaseDaily(String createDate, String mic, String visits,
                                  String visitor, String pv, String click, String bounceVisit, String viewTime) {
-        this.createDate = createDate;
+
         this.mic = mic;
         this.visits = visits;
         this.visitor = visitor;
@@ -108,7 +108,7 @@ public class TbAmpBackendBaseDaily {
     
     public String toString() {
         return
-                createDate +
+                "'" + createDate + '\'' +
                 ", '" + mic + '\'' +
                 "," + visits + 
                 "," + visitor + 
