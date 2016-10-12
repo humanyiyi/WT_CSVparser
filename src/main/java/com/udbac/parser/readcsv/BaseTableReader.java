@@ -4,6 +4,7 @@ import com.udbac.parser.entity.*;
 import com.udbac.parser.util.TimeUtil;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by 43890 on 2016/9/19.
  */
 public class BaseTableReader {
+    private static Logger logger = Logger.getLogger(BaseTableReader.class);
 
     /**
      * 获取监测日数据基础表数据
@@ -32,35 +34,46 @@ public class BaseTableReader {
         File jumpFile = new File(dir + "\\营销活动(跳出).csv");
 
         if (!visitsFile.exists()) {
-            System.out.println("营销活动(访次).csv文件不存在。");
+            logger.error(visitsFile + "文件不存在。");
+//            System.out.println(visitsFile + "文件不存在。");
         } else if (!avisitFile.exists()) {
-            System.out.println("营销活动(访客).csv文件不存在。");
+            logger.error(avisitFile + "文件不存在。");
+//            System.out.println(avisitFile + "文件不存在。");
         } else if (!activityFile.exists()) {
-            System.out.println("营销活动(clicks).csv文件不存在。");
+            logger.error(activityFile + "文件不存在。");
+//            System.out.println(activityFile + "文件不存在。");
         } else if (!jumpFile.exists()) {
-            System.out.println("营销活动(跳出).csv文件不存在。");
+            logger.error(jumpFile + "文件不存在。");
+//            System.out.println(jumpFile + "文件不存在。");
         } else {
             List<String[]> visitRows = parseCSV2Rows(visitsFile);
             List<String[]> avisitRows = parseCSV2Rows(avisitFile);
             List<String[]> activityRows = parseCSV2Rows(activityFile);
             List<String[]> jumpRows = parseCSV2Rows(jumpFile);
-//            if (!getTime(visitRows).equals(TimeUtil.getYesterday())) {
-//                System.out.println("营销活动(访次).csv中日期不对。");
-//            } else if (!getTime(avisitRows).equals(TimeUtil.getYesterday())) {
-//                System.out.println("营销活动(访客).csv中日期不对。");
-//            } else if (!getTime(activityRows).equals(TimeUtil.getYesterday())) {
-//                System.out.println("营销活动(clicks).csv中日期不对。");
-//            } else if (!getTime(jumpRows).equals(TimeUtil.getYesterday())) {
-//                System.out.println("营销活动(跳出).csv中日期不对。");
-//            } else
-             if (visitRows.size() < 2000) {
-                System.out.print("营销活动(访次).csv文件中数据质量存在问题。");
+            if (!getTime(visitRows).equals(TimeUtil.getYesterday())) {
+                logger.error(visitsFile + "中日期不对。");
+//                System.out.println(visitsFile + "中日期不对。");
+            } else if (!getTime(avisitRows).equals(TimeUtil.getYesterday())) {
+                logger.error(avisitFile + "中日期不对。");
+//                System.out.println(avisitFile + "中日期不对。");
+            } else if (!getTime(activityRows).equals(TimeUtil.getYesterday())) {
+                logger.error(activityFile + "中日期不对。");
+//                System.out.println(activityFile + "中日期不对。");
+            } else if (!getTime(jumpRows).equals(TimeUtil.getYesterday())) {
+                logger.error(jumpFile + "中日期不对。");
+//                System.out.println(jumpFile + "中日期不对。");
+            } else if (visitRows.size() < 2000) {
+                logger.error(visitsFile + "文件中数据质量存在问题。");
+//                System.out.println(visitsFile + "文件中数据质量存在问题。");
             } else if (avisitRows.size() < 2000) {
-                System.out.print("营销活动(访客).csv文件中数据质量存在问题。");
+                logger.error(avisitFile + "文件中数据质量存在问题。");
+//                System.out.println(avisitFile + "文件中数据质量存在问题。");
             } else if (activityRows.size() < 2000) {
-                System.out.print("营销活动(clicks).csv文件中数据质量存在问题。");
+                logger.error(activityFile + "文件中数据质量存在问题。");
+//                System.out.println(activityFile + "文件中数据质量存在问题。");
             } else if (jumpRows.size() < 1600) {
-                System.out.print("营销活动(跳出).csv文件中数据质量存在问题。");
+                logger.error(jumpFile + "文件中数据质量存在问题。");
+//                System.out.println(jumpFile + "文件中数据质量存在问题。");
             } else {
                 for (String[] row1 : visitRows) {
                     baseTable = new TbAmpBackendBaseDaily();
@@ -115,15 +128,20 @@ public class BaseTableReader {
 
         File partsFile = new File(dir + "\\营销活动_挑配件转化.csv");
         if (!macketFile.exists()) {
-            System.out.println("营销活动(落地页元素点击)去掉nv.csv文件不存在。");
+            logger.error(macketFile + "文件不存在。");
+//            System.out.println(macketFile + "文件不存在。");
         } else if (!transactionFile.exists()) {
-            System.out.println("营销活动_办业务转化.csv文件不存在。");
+            logger.error(transactionFile + "文件不存在。");
+//            System.out.println(transactionFile + "文件不存在。");
         } else if (!phonBuyFile.exists()) {
-            System.out.println("营销活动_买手机转化.csv文件不存在。");
+            logger.error(phonBuyFile + "文件不存在。");
+//            System.out.println(phonBuyFile + "文件不存在。");
         } else if (!setMealFile.exists()) {
-            System.out.println("营销活动_办套餐转化.csv文件不存在。");
+            logger.error(setMealFile + "文件不存在。");
+//            System.out.println(setMealFile + "文件不存在。");
         } else if (!partsFile.exists()) {
-            System.out.println("营销活动_挑配件转化.csv文件不存在。");
+            logger.error(partsFile + "文件不存在。");
+//            System.out.println(partsFile + "文件不存在。");
         } else {
             List<String[]> macketRows = parseCSV1Rows(macketFile);
             List<String[]> transactionRows = parseCSV2Rows(transactionFile);
@@ -131,25 +149,35 @@ public class BaseTableReader {
             List<String[]> setMealRows = parseCSV2Rows(setMealFile);
             List<String[]> partsRows = parseCSV2Rows(partsFile);
             if (!getTime(macketRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销活动(落地页元素点击)去掉nv.csv中日期不对。");
+                logger.error(macketFile + "中日期不对。");
+//                System.out.println(macketFile + "中日期不对。");
             } else if (!getTime(transactionRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销活动_办业务转化.csv中日期不对。");
+                logger.error(transactionFile + "中日期不对。");
+//                System.out.println(transactionFile + "中日期不对。");
             } else if (!getTime(phonBuyRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销活动_买手机转化.csv中日期不对。");
+                logger.error(phonBuyFile + "中日期不对。");
+//                System.out.println(phonBuyFile + "中日期不对。");
             } else if (!getTime(setMealRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销活动_办套餐转化.csv中日期不对。");
+                logger.error(setMealFile + "中日期不对。");
+//                System.out.println(setMealFile + "中日期不对。");
             } else if (!getTime(partsRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销活动_挑配件转化.csv中日期不对。");
+                logger.error(partsFile + "中日期不对。");
+//                System.out.println(partsFile + "中日期不对。");
             } else if (macketRows.size() < 1000) {
-                System.out.println("营销活动(落地页元素点击)去掉nv.csv文件中数据质量存在问题。");
+                logger.error(macketFile + "文件中数据质量存在问题。");
+//                System.out.println(macketFile + "文件中数据质量存在问题。");
             } else if (transactionRows.size() < 1000) {
-                System.out.println("营销活动_办业务转化.csv文件中数据质量存在问题。");
+                logger.error(transactionFile + "文件中数据质量存在问题。");
+//                System.out.println(transactionFile + "文件中数据质量存在问题。");
             } else if (phonBuyRows.size() < 1000) {
-                System.out.println("营销活动_买手机转化.csv文件中数据质量存在问题。");
+                logger.error(phonBuyFile + "文件中数据质量存在问题。");
+//                System.out.println(phonBuyFile + "文件中数据质量存在问题。");
             } else if (setMealRows.size() < 1000) {
-                System.out.println("营销活动_办套餐转化.csv文件中数据质量存在问题。");
+                logger.error(setMealFile + "文件中数据质量存在问题。");
+//                System.out.println(setMealFile + "文件中数据质量存在问题。");
             } else if (partsRows.size() < 1000) {
-                System.out.println("营销活动_挑配件转化.csv文件中数据质量存在问题。");
+                logger.error(partsFile + "文件中数据质量存在问题。");
+//                System.out.println(partsFile + "文件中数据质量存在问题。");
             } else {
                 for (String[] row1 : macketRows) {
                     tbAmpBackendTransDaily = new TbAmpBackendTransDaily();
@@ -206,7 +234,7 @@ public class BaseTableReader {
      */
     public static List<TbAmpFlowMarketingDaily> getTbAmpFlowMarketingDaily(String dir) {
 
-        File ampFlowMarketFile = new File(dir + "\\营销流量allhits_WT.es-new.csv");
+        File ampFlowMarketFile = new File(dir + "\\营销流量allhits_WT.es-new1.csv");
 //        File ampFlowMarketFile = new File(dir + "\\book1.csv");
         List<String[]> ampFlowMarketRows;
 //        CsvUtil ampFlowMarketUtil ;
@@ -214,13 +242,16 @@ public class BaseTableReader {
         List<TbAmpFlowMarketingDaily> tbAmpFlowMarketingDailyList = new ArrayList<TbAmpFlowMarketingDaily>();
         TbAmpFlowMarketingDaily tbAmpFlowMarketingDaily = null;
         if (!ampFlowMarketFile.exists()) {
-            System.err.println("营销流量allhits_WT.es-new.csv文件不存在。");
+            logger.error(ampFlowMarketFile + "文件不存在。");
+//            System.err.println(ampFlowMarketFile + "文件不存在。");
         } else {
             ampFlowMarketRows = parseCSV2Rows(ampFlowMarketFile);
             if (!getTime(ampFlowMarketRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("营销流量allhits_WT.es-new.csv中日期不对。");
+                logger.error(ampFlowMarketFile + "中日期不对。");
+//                System.out.println(ampFlowMarketFile + "中日期不对。");
             } else if (ampFlowMarketRows.size() < 1000) {
-                System.out.println("营销流量allhits_WT.es-new.csv文件中数据质量存在问题。");
+                logger.error(ampFlowMarketFile + "文件中数据质量存在问题。");
+//                System.out.println(ampFlowMarketFile + "文件中数据质量存在问题。");
             } else {
                 for (String[] row1 : ampFlowMarketRows) {
                     tbAmpFlowMarketingDaily = new TbAmpFlowMarketingDaily();
@@ -265,27 +296,36 @@ public class BaseTableReader {
 
         File mcidTouchFile = new File(dir + "\\访前网站_入站页(排除mcid)touch.csv");
         if (!mcidPortalFile.exists()) {
-            System.out.println("访前网站_入站页(排除mcid)门户pc.csv文件不存在。");
+            logger.error(mcidPortalFile + "文件不存在。");
+//            System.out.println(mcidPortalFile + "文件不存在。");
         } else if (!mcidShopFile.exists()) {
-            System.out.println("访前网站_入站页(排除mcid)shop.csv文件不存在。");
+            logger.error(mcidShopFile + "文件不存在。");
+//            System.out.println(mcidShopFile + "文件不存在。");
         } else if (!mcidTouchFile.exists()) {
-            System.out.println("访前网站_入站页(排除mcid)touch.csv文件不存在。");
+            logger.error(mcidTouchFile + "文件不存在。");
+//            System.out.println(mcidTouchFile + "文件不存在。");
         } else {
             List<String[]> mcidPortalRows = parseCSV2Rows(mcidPortalFile);
             List<String[]> mcidShopRows = parseCSV2Rows(mcidShopFile);
             List<String[]> mcidTouchRows = parseCSV2Rows(mcidTouchFile);
             if (!getTime(mcidPortalRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("访前网站_入站页(排除mcid)门户pc.csv中日期不对。");
+                logger.error(mcidPortalFile + "中日期不对。");
+//                System.out.println(mcidPortalFile + "中日期不对。");
             } else if (!getTime(mcidShopRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("访前网站_入站页(排除mcid)shop.csv中日期不对。");
+                logger.error(mcidShopFile + "中日期不对。");
+//                System.out.println(mcidShopFile + "中日期不对。");
             } else if (!getTime(mcidTouchRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("访前网站_入站页(排除mcid)touch.csv中日期不对。");
+                logger.error(mcidTouchFile + "中日期不对。");
+//                System.out.println(mcidTouchFile + "中日期不对。");
             } else if (mcidPortalRows.size() < 4560) {
-                System.out.println("访前网站_入站页(排除mcid)门户pc.csv文件中数据质量存在问题。");
+                logger.error(mcidPortalFile + "文件中数据质量存在问题。");
+//                System.out.println(mcidPortalFile + "文件中数据质量存在问题。");
             } else if (mcidShopRows.size() < 10665) {
-                System.out.println("访前网站_入站页(排除mcid)shop.csv文件中数据质量存在问题。");
+                logger.error(mcidShopFile + "文件中数据质量存在问题。");
+//                System.out.println(mcidShopFile + "文件中数据质量存在问题。");
             } else if (mcidTouchRows.size() < 7730) {
-                System.out.println("访前网站_入站页(排除mcid)touch.csv文件中数据质量存在问题。");
+                logger.error(mcidTouchFile + "文件中数据质量存在问题。");
+//                System.out.println(mcidTouchFile + "文件中数据质量存在问题。");
             } else {
                 for (String[] row1 : mcidPortalRows) {
 
@@ -364,11 +404,14 @@ public class BaseTableReader {
         File touchFile = new File(dir + "\\touch_页.csv");
 
         if (!portalFile.exists()) {
-            System.out.println("门户_页.csv文件不存在。");
+            logger.error(portalFile + "文件不存在。");
+//            System.out.println(portalFile + "文件不存在。");
         } else if (!shopFile.exists()) {
-            System.out.println("shop_页.csv文件不存在。");
+            logger.error(shopFile + "文件不存在。");
+//            System.out.println(shopFile + "文件不存在。");
         } else if (!touchFile.exists()) {
-            System.out.println("touch_页.csv文件不存在。");
+            logger.error(touchFile + "文件不存在。");
+//            System.out.println(touchFile + "文件不存在。");
         } else {
 
             List<String[]> portalRows = parseCSV2Rows(portalFile);
@@ -376,17 +419,23 @@ public class BaseTableReader {
             List<String[]> touchRows = parseCSV2Rows(touchFile);
 
             if (!getTime(portalRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("门户_页.csv中日期不对。");
+                logger.error(portalFile + "中日期不对。");
+//                System.out.println(portalFile + "中日期不对。");
             } else if (!getTime(shopRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("shop_页.csv中日期不对。");
+                logger.error(shopFile + "中日期不对。");
+//                System.out.println(shopFile + "中日期不对。");
             } else if (!getTime(touchRows).equals(TimeUtil.getYesterday())) {
-                System.out.println("touch_页.csv中日期不对。");
+                logger.error(touchFile + "中日期不对。");
+//                System.out.println(touchFile + "中日期不对。");
             } else if (portalRows.size() < 5200) {
-                System.out.println("门户_页.csv文件中数据质量存在问题。");
+                logger.error(portalFile + "文件中数据质量存在问题。");
+//                System.out.println(portalFile + "文件中数据质量存在问题。");
             } else if (shopRows.size() < 62320) {
-                System.out.println("shop_页.csv文件中数据质量存在问题。");
+                logger.error(shopFile + "文件中数据质量存在问题。");
+//                System.out.println(shopFile + "文件中数据质量存在问题。");
             } else if (touchRows.size() < 21200) {
-                System.out.println("touch_页.csv文件中数据质量存在问题。");
+                logger.error(touchFile + "文件中数据质量存在问题。");
+//                System.out.println(touchFile + "文件中数据质量存在问题。");
             } else {
                 for (String[] row1 : portalRows) {
                     tbAmpFlowTotalDaily = new TbAmpFlowTotalDaily();
