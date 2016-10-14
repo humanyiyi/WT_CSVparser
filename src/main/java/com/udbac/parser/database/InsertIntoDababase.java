@@ -3,7 +3,6 @@ package com.udbac.parser.database;
 import com.udbac.parser.entity.*;
 import com.udbac.parser.readcsv.BaseTableReader;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,9 +17,8 @@ public class InsertIntoDababase {
 	 * 输入后端监测日数据到tb_amp_backend_base _daily表中
 	 */	 
 	public void insertIntoTbAmpBackendBaseDaily() throws SQLException{
-		PropertyConfigurator.configure("log4j.properties");
 //		String tableName = "csvtest";
-		String tableName = "TbAmpBackendBaseDailyTable";
+		String tableName = "tb_amp_backend_base_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
@@ -61,7 +59,7 @@ public class InsertIntoDababase {
 	 * 输入活动网站监测业务转换数据到tb_amp_backend_trans_daily表中
 	 */
 	public  void insertIntoTbAmpBackendTransDaily() throws SQLException{
-		PropertyConfigurator.configure("log4j.properties");
+//		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_backend_trans_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -89,8 +87,8 @@ public class InsertIntoDababase {
 	/**
 	 * 输入数据到tb_amp_flow_marketing_daily表中
 	 */
-	public  void insertIntoTbAmpFlowMarketingDaily() throws Exception {
-		PropertyConfigurator.configure("log4j.properties");
+	public  void insertIntoTbAmpFlowMarketingDaily() throws SQLException{
+//		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_marketing_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -120,7 +118,7 @@ public class InsertIntoDababase {
 	 */
 	public  void insertIntoTbAmpFlowNatureDaily() throws  SQLException {
 		
-		PropertyConfigurator.configure("log4j.properties");
+//		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_nature_daily_table";
 		if(con ==null){
 	        con = BeyondbConnection.getConnection();
@@ -152,7 +150,7 @@ public class InsertIntoDababase {
 	 * 输入数据到tb_amp_flow_total_daily表中
 	 */
 	public  void insertIntoTbAmpFlowTotalDaily() throws SQLException{
-		PropertyConfigurator.configure("log4j.properties");
+//		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "tb_amp_flow_total_daily_table";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){
@@ -178,7 +176,7 @@ public class InsertIntoDababase {
 	}
 
 	public  void insertIntoTbAmpWebDaily() throws SQLException{
-		PropertyConfigurator.configure("log4j.properties");
+//		PropertyConfigurator.configure("log4j.properties");
 		String tableName = "test";
 //		BaseTableReader bt= new BaseTableReader();
 		if(con ==null){

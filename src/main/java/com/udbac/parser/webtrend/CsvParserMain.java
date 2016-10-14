@@ -1,11 +1,18 @@
 package com.udbac.parser.webtrend;
 
 import com.udbac.parser.database.InsertIntoDababase;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.SQLException;
 
 public class CsvParserMain {
-	
+    static {
+//        Properties prop = new Properties();
+        PropertyConfigurator.configure("log4j.properties");
+    }
+
+
+
 	public static void main(String[] args) throws SQLException {
 		InsertIntoDababase in = new InsertIntoDababase();
 		/**

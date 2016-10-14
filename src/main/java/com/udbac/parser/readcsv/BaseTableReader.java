@@ -185,6 +185,7 @@ public class BaseTableReader {
                         continue;
                     } else {
                         if (row1[2].equals("合计")) {
+                            tbAmpBackendTransDaily.setCreateDate(getTime(macketRows));
                             tbAmpBackendTransDaily.setMic(row1[1]);
                             tbAmpBackendTransDaily.setBehaviorVV(row1[5]);
                             for (String[] row2 : transactionRows) {
@@ -234,7 +235,7 @@ public class BaseTableReader {
      */
     public static List<TbAmpFlowMarketingDaily> getTbAmpFlowMarketingDaily(String dir) {
 
-        File ampFlowMarketFile = new File(dir + "\\营销流量allhits_WT.es-new1.csv");
+        File ampFlowMarketFile = new File(dir + "\\营销流量allhits_WT.es-new.csv");
 //        File ampFlowMarketFile = new File(dir + "\\book1.csv");
         List<String[]> ampFlowMarketRows;
 //        CsvUtil ampFlowMarketUtil ;
@@ -261,6 +262,7 @@ public class BaseTableReader {
                     if (row1[2].equals("合计")) {
                         continue;
                     }
+                    tbAmpFlowMarketingDaily.setCreateDate(getTime(ampFlowMarketRows));
                     tbAmpFlowMarketingDaily.setMic(row1[1]);
                     tbAmpFlowMarketingDaily.setUrl(row1[2]);
                     tbAmpFlowMarketingDaily.setVisits(row1[3]);
@@ -289,8 +291,7 @@ public class BaseTableReader {
 
         File mcidPortalFile = new File(dir + "\\访前网站_入站页(排除mcid)门户pc.csv");
 
-//		File mcidPortalTouchFile = new File(dir + "\\访前网站_入站页(排除mcid)门户pc.csv");
-//		List<String[]> mcidPortalTouchRows = parseCSV2Rows(mcidPortalTouchFile);
+        File mcidPortalTouchFile = new File(dir + "\\访前网站_入站页(排除mcid)门户mobile.csv");
 
         File mcidShopFile = new File(dir + "\\访前网站_入站页(排除mcid)shop.csv");
 
@@ -298,6 +299,8 @@ public class BaseTableReader {
         if (!mcidPortalFile.exists()) {
             logger.error(mcidPortalFile + "文件不存在。");
 //            System.out.println(mcidPortalFile + "文件不存在。");
+        } else if (!mcidPortalTouchFile.exists()) {
+            logger.error(mcidPortalTouchFile + "文件不存在。");
         } else if (!mcidShopFile.exists()) {
             logger.error(mcidShopFile + "文件不存在。");
 //            System.out.println(mcidShopFile + "文件不存在。");
@@ -306,11 +309,14 @@ public class BaseTableReader {
 //            System.out.println(mcidTouchFile + "文件不存在。");
         } else {
             List<String[]> mcidPortalRows = parseCSV2Rows(mcidPortalFile);
+            List<String[]> mcidPortalTouchRows = parseCSV2Rows(mcidPortalTouchFile);
             List<String[]> mcidShopRows = parseCSV2Rows(mcidShopFile);
             List<String[]> mcidTouchRows = parseCSV2Rows(mcidTouchFile);
             if (!getTime(mcidPortalRows).equals(TimeUtil.getYesterday())) {
                 logger.error(mcidPortalFile + "中日期不对。");
 //                System.out.println(mcidPortalFile + "中日期不对。");
+            } else if (!getTime(mcidPortalTouchRows).equals(TimeUtil.getYesterday())) {
+                logger.error(mcidPortalTouchFile + "中日期不对。");
             } else if (!getTime(mcidShopRows).equals(TimeUtil.getYesterday())) {
                 logger.error(mcidShopFile + "中日期不对。");
 //                System.out.println(mcidShopFile + "中日期不对。");
@@ -320,6 +326,8 @@ public class BaseTableReader {
             } else if (mcidPortalRows.size() < 4560) {
                 logger.error(mcidPortalFile + "文件中数据质量存在问题。");
 //                System.out.println(mcidPortalFile + "文件中数据质量存在问题。");
+            } else if (mcidPortalTouchRows.size() < 1000) {
+                logger.error(mcidPortalTouchFile + "文件中数据质量存在问题。");
             } else if (mcidShopRows.size() < 10665) {
                 logger.error(mcidShopFile + "文件中数据质量存在问题。");
 //                System.out.println(mcidShopFile + "文件中数据质量存在问题。");
@@ -336,11 +344,31 @@ public class BaseTableReader {
                     if (row1[4] != null && row1[4].equals("合计")) {
                         continue;
                     }
-                    tbAmpFlowNatureDaily.setClassfy("增加端口维度");
+                    tbAmpFlowNatureDaily.setCreateDate(getTime(mcidPortalRows));
+                    tbAmpFlowNatureDaily.setClassfy("PORTAL_PC");
                     tbAmpFlowNatureDaily.setUrl(row1[2]);
                     tbAmpFlowNatureDaily.setEntryPage(row1[4]);
                     tbAmpFlowNatureDaily.setVisits(row1[7]);
                     tbAmpFlowNatureDaily.setPv(row1[9]);
+
+                    tbAmpFlowNatureDailyList.add(tbAmpFlowNatureDaily);
+                }
+
+                for (String[] row4 : mcidPortalRows) {
+
+                    tbAmpFlowNatureDaily = new TbAmpFlowNatureDaily();
+                    if (row4.length != 10 || null == row4[0]) {
+                        continue;
+                    }
+                    if (row4[4] != null && row4[4].equals("合计")) {
+                        continue;
+                    }
+                    tbAmpFlowNatureDaily.setCreateDate(getTime(mcidPortalRows));
+                    tbAmpFlowNatureDaily.setClassfy("PORTAL_MOBILE");
+                    tbAmpFlowNatureDaily.setUrl(row4[2]);
+                    tbAmpFlowNatureDaily.setEntryPage(row4[4]);
+                    tbAmpFlowNatureDaily.setVisits(row4[7]);
+                    tbAmpFlowNatureDaily.setPv(row4[9]);
 
                     tbAmpFlowNatureDailyList.add(tbAmpFlowNatureDaily);
                 }
@@ -354,7 +382,8 @@ public class BaseTableReader {
                     if (row2[4] != null && row2[4].equals("合计")) {
                         continue;
                     }
-                    tbAmpFlowNatureDaily.setClassfy("PC端");
+                    tbAmpFlowNatureDaily.setCreateDate(getTime(mcidShopRows));
+                    tbAmpFlowNatureDaily.setClassfy("SHOP");
                     tbAmpFlowNatureDaily.setUrl(row2[2]);
                     tbAmpFlowNatureDaily.setEntryPage(row2[4]);
                     tbAmpFlowNatureDaily.setVisits(row2[7]);
@@ -372,7 +401,8 @@ public class BaseTableReader {
                     if (row3[4] != null && row3[4].equals("合计")) {
                         continue;
                     }
-                    tbAmpFlowNatureDaily.setClassfy("移动端");
+                    tbAmpFlowNatureDaily.setCreateDate(getTime(mcidTouchRows));
+                    tbAmpFlowNatureDaily.setClassfy("TOUCH");
                     tbAmpFlowNatureDaily.setUrl(row3[2]);
                     tbAmpFlowNatureDaily.setEntryPage(row3[4]);
                     tbAmpFlowNatureDaily.setVisits(row3[7]);
@@ -442,7 +472,8 @@ public class BaseTableReader {
                     if (row1.length != 8 || null == row1[0]) {
                         continue;
                     }
-                    tbAmpFlowTotalDaily.setClassfy("");
+                    tbAmpFlowTotalDaily.setCreateDate(getTime(portalRows));
+                    tbAmpFlowTotalDaily.setClassfy("PORTAL");
                     tbAmpFlowTotalDaily.setUrl(row1[2]);
                     tbAmpFlowTotalDaily.setVisits(row1[5]);
                     tbAmpFlowTotalDaily.setPv(row1[6]);
@@ -457,7 +488,8 @@ public class BaseTableReader {
                     if (row2.length != 8 || null == row2[0]) {
                         continue;
                     }
-                    tbAmpFlowTotalDaily.setClassfy("PC端");
+                    tbAmpFlowTotalDaily.setCreateDate(getTime(shopRows));
+                    tbAmpFlowTotalDaily.setClassfy("SHOP");
                     tbAmpFlowTotalDaily.setUrl(row2[2]);
                     tbAmpFlowTotalDaily.setVisits(row2[5]);
                     tbAmpFlowTotalDaily.setPv(row2[6]);
@@ -472,7 +504,8 @@ public class BaseTableReader {
                     if (row3.length != 8 || null == row3[0]) {
                         continue;
                     }
-                    tbAmpFlowTotalDaily.setClassfy("移动端");
+                    tbAmpFlowTotalDaily.setCreateDate(getTime(touchRows));
+                    tbAmpFlowTotalDaily.setClassfy("TOUCH");
                     tbAmpFlowTotalDaily.setUrl(row3[2]);
                     tbAmpFlowTotalDaily.setVisits(row3[5]);
                     tbAmpFlowTotalDaily.setPv(row3[6]);
